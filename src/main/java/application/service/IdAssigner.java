@@ -27,6 +27,7 @@ public class IdAssigner {
 
     public void assign(Drug d) {
         d.setId(seq.getNextSequence("DRUG_SEQUENCE"));
+
     }
 
 
