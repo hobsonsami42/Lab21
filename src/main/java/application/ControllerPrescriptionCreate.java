@@ -25,7 +25,7 @@ public class ControllerPrescriptionCreate {
     /*
      * Request for new prescription form.
      */
-    @GetMapping("/prescription/create")
+    @GetMapping("/prescription/new")
     public String getNewPrescriptionForm(Model model) {
         model.addAttribute("prescription", new PrescriptionView());
         return "prescription_create";
@@ -34,7 +34,7 @@ public class ControllerPrescriptionCreate {
     /*
      * Process prescription creation.
      */
-    @PostMapping("/prescription/create")
+    @PostMapping("/prescription")
     public String createPrescription(PrescriptionView prescriptionView, Model model) {
         // get the next unique id for prescription
         int rxid = sequence.getNextSequence("PRESCRIPTION_SEQUENCE");
@@ -57,4 +57,3 @@ public class ControllerPrescriptionCreate {
         return "prescription_show";
     }
 }
-
