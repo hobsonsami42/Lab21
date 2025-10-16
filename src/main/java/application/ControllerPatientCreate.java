@@ -79,6 +79,7 @@ public class ControllerPatientCreate {
     patientM.setPrimaryName(doc.getLastName());
     patientRepository.insert(patientM);
 
+    p.setId(id); // set the patient id to be displayed
     // display message and patient information
     model.addAttribute("message", "Registration successful.");
     model.addAttribute("patient", p);
