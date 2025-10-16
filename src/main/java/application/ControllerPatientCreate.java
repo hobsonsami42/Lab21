@@ -68,6 +68,7 @@ public class ControllerPatientCreate {
     // copy data from PatientView to model
     Patient patientM = new Patient();
     patientM.setId(id);
+    patientM.setSsn(p.getSsn());
     patientM.setFirstName(p.getFirstName());
     patientM.setLastName(p.getLastName());
     patientM.setStreet(p.getStreet());
@@ -100,10 +101,11 @@ public class ControllerPatientCreate {
   public String showPatient(PatientView p, Model model) {
 
     // retrieve patient using the id, last_name entered by user
-    Patient patientM = patientRepository.findByIdAndFirstNameAndLastName(p.getId(),
-        p.getFirstName(), p.getLastName());
+    Patient patientM = patientRepository.findByIdAndLastName(p.getId(),
+        p.getLastName());
 
     if (patientM != null) {
+      p.setId(patientM.getId());
       p.setFirstName(patientM.getFirstName());
       p.setStreet(patientM.getStreet());
       p.setCity(patientM.getCity());
