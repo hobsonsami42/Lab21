@@ -28,14 +28,14 @@ public class ControllerPatientUpdate {
   /*
    *  Display patient profile for patient id.
    */
-  @GetMapping("/patient/edit/{id}/{lastName}")
-  public String getUpdateForm(@PathVariable int id, @PathVariable String lastName, Model model) {
+  @GetMapping("/patient/edit/{id}")
+  public String getUpdateForm(@PathVariable int id, Model model) {
     System.out.println("getUpdateForm " + id);
 
     PatientView pv = new PatientView();
     pv.setId(id);
 
-    Patient patient = patientRepository.findByIdAndLastName(id, lastName);
+    Patient patient = patientRepository.findById(id);
     if (patient != null) {
       pv.setLastName(patient.getLastName());
       pv.setFirstName(patient.getFirstName());
@@ -84,7 +84,7 @@ public class ControllerPatientUpdate {
 
       model.addAttribute("message", "Profile updated for patient ID " + p.getId());
       model.addAttribute("patient", p);
-      return "patient_edit";
+      return "patient_show";
     } else {
       model.addAttribute("message", "Patient not found for ID " + p.getId());
       return "index";
