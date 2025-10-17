@@ -14,6 +14,8 @@ public class Pharmacy {
 	String address;
 	String phone;
 	ArrayList<DrugCost> drugCosts = new ArrayList<>();
+
+    public Pharmacy() {}
 	
 	public static class DrugCost {
 		String drugName;

@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import view.PrescriptionView;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 
 @Controller
@@ -110,7 +112,7 @@ public class ControllerPrescriptionFill {
       // new fill record
       Prescription.FillRequest newFill = new Prescription.FillRequest();
       newFill.setPharmacyID(pharmacy.getId());
-      newFill.setDateFilled(LocalDate.now().toString());
+      newFill.setDateFilled(LocalDate.now());
       newFill.setCost(p.getCost());
 
       if (rx.getFills() == null) {
@@ -125,7 +127,7 @@ public class ControllerPrescriptionFill {
       Doctor doctor = doctorRepository.findByLastName(patient.getPrimaryName());
       int fillsRemaining = rx.getRefills() - rx.getFills().size();
 
-      p.setDateFilled(LocalDate.now().toString());
+      p.setDateFilled(LocalDate.now());
       p.setDoctorId(doctor.getId());
       p.setDoctorFirstName(doctor.getFirstName());
       p.setDoctorLastName(doctor.getLastName());

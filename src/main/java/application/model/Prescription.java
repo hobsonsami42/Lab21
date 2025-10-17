@@ -1,6 +1,9 @@
 package application.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,7 +17,7 @@ public class Prescription {
 	public static class FillRequest {
 		
 		private int pharmacyID;    
-		private String dateFilled;    
+		private LocalDate dateFilled;
 		private String cost;
 		
 		
@@ -24,10 +27,10 @@ public class Prescription {
 		public void setPharmacyID(int pharmacyID) {
 			this.pharmacyID = pharmacyID;
 		}
-		public String getDateFilled() {
+		public LocalDate getDateFilled() {
 			return dateFilled;
 		}
-		public void setDateFilled(String dateFilled) {
+		public void setDateFilled(LocalDate dateFilled) {
 			this.dateFilled = dateFilled;
 		}
 		public String getCost() {
@@ -52,7 +55,50 @@ public class Prescription {
 	private String dateCreated;
 	private int refills;
 	private ArrayList<FillRequest> fills = new ArrayList<>();
-	
+	private int pharmacyId;
+    private String pharmacyName;
+    private String pharmacyAddress;
+    private String pharmacyPhone;
+    private double cost;
+    private LocalDate dateFilled;
+
+    public LocalDate getDateFilled() {
+        return dateFilled;
+    }
+    public void setDateFilled(LocalDate dateFilled) {
+        this.dateFilled = dateFilled;
+    }
+
+    public int getPharmacyId() {
+        return pharmacyId;
+    }
+    public void setPharmacyId(int pharmacyId) {
+        this.pharmacyId = pharmacyId;
+    }
+    public String getPharmacyName() {
+        return pharmacyName;
+    }
+    public void setPharmacyName(String pharmacyName) {
+        this.pharmacyName = pharmacyName;
+    }
+    private String getPharmacyAddress() {
+        return pharmacyAddress;
+    }
+    public void setPharmacyAddress(String pharmacyAddress) {
+        this.pharmacyAddress = pharmacyAddress;
+    }
+    public String getPharmacyPhone() {
+        return pharmacyPhone;
+    }
+    public void setPharmacyPhone(String pharmacyPhone) {
+        this.pharmacyPhone = pharmacyPhone;
+    }
+    public double getCost() {
+        return cost;
+    }
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
 	public int getRxid() {
 		return rxid;
 	}

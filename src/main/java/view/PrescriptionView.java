@@ -1,5 +1,11 @@
 package view;
 
+import application.model.Prescription;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+
 /*
  * This class is used to transfer data to/from prescription template pages.
  */
@@ -21,10 +27,18 @@ public class PrescriptionView {
 	private String pharmacyAddress; 
 	private String pharmacyPhone;
 	private String pharmacyName;
-	private String dateFilled;    
+	private LocalDate dateFilled;
 	private String cost;
 	private int refills;
 	private int refillsRemaining;
+    private ArrayList<Prescription.FillRequest> fills;
+
+    public ArrayList<Prescription.FillRequest> getFills() {
+        return fills;
+    }
+    public void setFills(ArrayList<Prescription.FillRequest> fills) {
+        this.fills = fills;
+    }
 	
 	
 	public int getRxid() {
@@ -111,10 +125,10 @@ public class PrescriptionView {
 	public void setPharmacyName(String pharmacyName) {
 		this.pharmacyName = pharmacyName;
 	}
-	public String getDateFilled() {
+	public LocalDate getDateFilled() {
 		return dateFilled;
 	}
-	public void setDateFilled(String dateFilled) {
+	public void setDateFilled(LocalDate dateFilled) {
 		this.dateFilled = dateFilled;
 	}
 	public String getCost() {
