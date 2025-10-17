@@ -71,9 +71,6 @@ public class ControllerPrescriptionCreate {
             return "prescription_create";
         }
 
-        List<Pharmacy> pharmacies = pharmacyRepository.findByDrugCostsDrugName(drug.getName());
-        Pharmacy pharmacy = (pharmacies != null && !pharmacies.isEmpty()) ? pharmacies.get(0) : null;
-
 
         Prescription p = new Prescription();
         p.setRxid(rxid);
@@ -83,23 +80,8 @@ public class ControllerPrescriptionCreate {
         p.setDoctorId(doctor.getId());
         p.setDateCreated(prescriptionView.getDateCreated());
         p.setRefills(prescriptionView.getRefills());
-        p.setDateFilled(prescriptionView.getDateFilled());
         p.setFills(prescriptionView.getFills());
 
-        if (pharmacy != null) {
-            p.setPharmacyId(pharmacy.getId());
-            p.setPharmacyName(pharmacy.getName());
-            p.setPharmacyAddress(pharmacy.getAddress());
-            p.setPharmacyPhone(pharmacy.getPhone());
-
-            // Find the cost of this specific drug
-            for (Pharmacy.DrugCost cost : pharmacy.getDrugCosts()) {
-                if (cost.getDrugName().equalsIgnoreCase(drug.getName())) {
-                    p.setCost(cost.getCost());
-                    break;
-                }
-            }
-        }
 
         prescriptionRepository.insert(p);
 
@@ -109,20 +91,6 @@ public class ControllerPrescriptionCreate {
         prescriptionView.setDoctorLastName(doctor.getLastName());
         prescriptionView.setPatientFirstName(patient.getFirstName());
         prescriptionView.setPatientLastName(patient.getLastName());
-
-        if (pharmacy != null) {
-            prescriptionView.setPharmacyID(pharmacy.getId());
-            prescriptionView.setPharmacyName(pharmacy.getName());
-            prescriptionView.setPharmacyAddress(pharmacy.getAddress());
-            prescriptionView.setPharmacyPhone(pharmacy.getPhone());
-
-            for (Pharmacy.DrugCost cost : pharmacy.getDrugCosts()) {
-                if (cost.getDrugName().equalsIgnoreCase(drug.getName())) {
-                    prescriptionView.setCost(String.valueOf(cost.getCost()));
-                    break;
-                }
-            }
-        }
 
         model.addAttribute("message", "Prescription created successfully.");
         model.addAttribute("prescription", prescriptionView);
